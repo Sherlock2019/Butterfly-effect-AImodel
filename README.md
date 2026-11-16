@@ -19,6 +19,8 @@
 >
 > Today, prototype rules and authored consequences stand in for trained models. ACMP has 22 scenarios, a 3D
 > scene for each and 49 tests, and it never invents a probability.
+> Demo Here : http://100.31.100.157:3020/briefing
+> 
 >
 > **3 · What next.** We need resources and engineers to build a full, new **Action Prediction Model**:
 > train it, test it, evaluate it, then improve and retrain it in a loop. We also want to collaborate with
