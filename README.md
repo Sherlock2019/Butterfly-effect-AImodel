@@ -1,6 +1,6 @@
 # World-Wide-Effect-Prediction Model  WEP Model  · Butterfly  Effect Model 
 
-**1 actor · 1 action = consequences in cascade.** · ⏱️ [30-second version](README-30s.md)
+**1 actor · 1 action = consequences in cascade.**
 
 > ### 👋 To Y Combinator and investors
 >
@@ -26,6 +26,8 @@
 > [Build it with us](#build-it-with-us).
 >
 > *Draft: frontier labs as partners and customers is a hypothesis to validate. Amounts are placeholders.*
+
+**📖 [Full README](#why)** &nbsp;·&nbsp; **⏱️ [30-second version](README-30s.md)**
 
 ---
 
