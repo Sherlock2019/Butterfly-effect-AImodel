@@ -1,6 +1,6 @@
 # World-Wide-Effect-Prediction Model  WEP Model  · Butterfly  Effect Model 
 
-**1 actor · 1 action = consequences in cascade.**
+**1 actor · 1 action = consequences in cascade.** · ⏱️ [30-second version](README-30s.md)
 
 > ### 👋 To Y Combinator and investors
 >
