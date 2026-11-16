@@ -71,18 +71,21 @@ start() {
     done
     if [[ "$code" != "200" ]]; then echo "ACMP did not answer 200 (last: $code); see $LOG" >&2; tail -20 "$LOG" >&2; return 1; fi
     echo
-    echo "ACMP · Butterfly Eye View is running (standalone):"
-    echo "  Console (start here)   http://127.0.0.1:$PORT/            scenarios · write an action · cascade"
-    echo "  A scenario             http://127.0.0.1:$PORT/?scenario=lightning_datacenter"
-    echo "  World stack            http://127.0.0.1:$PORT/briefing#worlds"
-    echo "  Recorded examples      /chat · /scenarios · /inference · /lab · /classic"
+    echo "Butterfly Effect Prediction (ACMP) is running (standalone):"
+    echo "  1 What problem?        http://127.0.0.1:$PORT/briefing"
+    echo "  2 What is it?          http://127.0.0.1:$PORT/what"
+    echo "  3 How it solves it     http://127.0.0.1:$PORT/how"
+    echo "  4 Test it              http://127.0.0.1:$PORT/"
+    echo "  5 What next            http://127.0.0.1:$PORT/next"
     echo "  Logs                   $LOG"
     echo
     if [[ -n "$public_ip" ]]; then
         echo "Public links (from any browser; open inbound TCP $PORT in the security group / firewall):"
-        echo "  Console (start here)   http://$public_ip:$PORT/"
-        echo "  A scenario             http://$public_ip:$PORT/?scenario=lightning_datacenter"
-        echo "  World stack            http://$public_ip:$PORT/briefing#worlds"
+        echo "  1 What problem?        http://$public_ip:$PORT/briefing"
+        echo "  2 What is it?          http://$public_ip:$PORT/what"
+        echo "  3 How it solves it     http://$public_ip:$PORT/how"
+        echo "  4 Test it              http://$public_ip:$PORT/"
+        echo "  5 What next            http://$public_ip:$PORT/next"
         echo "  No login: anyone who can reach this address can use ACMP."
     else
         echo "Public links: no public IP detected. Set it and restart, e.g."

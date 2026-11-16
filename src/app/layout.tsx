@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Butterfly Eye View · The Butterfly Model",
+  title: "Butterfly Effect Prediction",
   description:
     "1 actor · 1 action = consequences in cascade. Watch an action's consequences spread across ten worlds and out to the planet, before it is taken.",
   icons: { icon: "/icon.svg" },

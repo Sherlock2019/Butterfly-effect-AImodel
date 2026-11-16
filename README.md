@@ -117,7 +117,7 @@ others around it.
 
 ### What ACMP does
 
-ACMP (Butterfly Eye View) is a consequence explorer. You describe one action, or pick one of 22 ready-made
+ACMP (the app is called **Butterfly Effect Prediction**) is a consequence explorer. You describe one action, or pick one of 22 ready-made
 scenarios. The actor can be a person, an AI, an animal, a natural phenomenon or an organisation. ACMP then shows:
 
 - **where the action lands first**: the layer it directly impacts, marked with a red action pulse;
@@ -300,13 +300,19 @@ formula.
 
 #### Pages
 
-| Page | What it does |
-|---|---|
-| `/` | the console above |
-| `/briefing` | background on the model, with the ten-world stack (`#worlds`) |
-| `/scenarios` · `/inference` · `/lab` | E1 recorded scripts · E2 recorded "what happens next?" answers · E3 2D physics lab (matter.js) |
-| `/chat` | the chat design, recorded only (sending is not available) |
-| `/classic` | the earlier globe-only console |
+Every page shares one header with five numbered sections (`src/components/Nav.tsx`):
+
+| Section | Page | What it shows |
+|---|---|---|
+| **1 · What problem does this solve?** | `/briefing` | what LLMs get wrong, and why it matters |
+| **2 · What is it?** | `/what` | the solution in detail: what it shows, the ten worlds (`#worlds`), the extension of ACM, honest labels, what it is not, key terms |
+| **3 · How it solves it** | `/how` | the five steps, one cascade, links to each engine, and the formulas (folded) |
+| | `/scenarios` · `/inference` · `/lab` | sub-tabs: Scenario engine (recorded scripts) · What happens next? (recorded answers) · Physics lab (2D, matter.js) |
+| **4 · Test it** | `/` | the console above |
+| **5 · What next** | `/next` | the roadmap, the path to the Global World View model, ACM as the decision gate, contact |
+
+Archived, linked from the footer only: `/chat` (the chat design, recorded only) and `/classic` (the earlier
+globe-only console).
 
 #### How it was built
 

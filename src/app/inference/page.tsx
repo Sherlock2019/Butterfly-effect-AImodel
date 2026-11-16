@@ -24,7 +24,7 @@ export default function Inference() {
 
   return (
     <PageShell>
-      <p className="classif">Experiment E2 // what happens next?</p>
+      <p className="classif">3 · How it solves it // What happens next?</p>
       <h1 className="mt-2 text-4xl font-semibold sm:text-5xl">Ask &ldquo;what happens next to…?&rdquo; <span className="accent">and get the reason.</span></h1>
       <p className="dim mt-3 max-w-3xl text-lg">Every answer below was computed by the rule engine from a sentence and its context, and carries the chain of steps that produced it. Nothing is hand-written.</p>
       <Plain>Pick a little story. The model tells you what happens next to each person in it, and shows its working, like a maths exercise.</Plain>

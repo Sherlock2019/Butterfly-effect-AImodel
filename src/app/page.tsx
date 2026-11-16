@@ -1,7 +1,7 @@
 "use client";
 
 /**
- * Butterfly Eye View console (v0.3): select a scenario or write an action → see the world it
+ * Butterfly Effect Prediction · Test it: the console (v0.3): select a scenario or write an action → see the world it
  * directly impacts → explore possible consequences in other worlds, with the rule, assumptions and
  * provenance behind each one.
  *
@@ -11,7 +11,6 @@
  * The previous globe-only console is kept at /classic.
  */
 
-import Link from "next/link";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { Globe, type GlobeApi } from "@/components/Globe";
 import { bearingOf } from "@/components/ButterflyRadar";
@@ -19,7 +18,7 @@ import { CommandBar } from "@/components/console/CommandBar";
 import { IntelPanel, ReachPanel, WorldsPanel } from "@/components/console/Panels";
 import { SensorFeed, type Flows } from "@/components/console/SensorFeed";
 import { SceneCam } from "@/components/console/SceneCam";
-import { Mark } from "@/components/ui";
+import { Brand, MainNav } from "@/components/Nav";
 import { WorldStack } from "@/components/WorldStack";
 import { BusinessBoard, EconomyBoard, GovernmentBoard, MediaBoard } from "@/components/bev/Boards";
 import { CascadePanel } from "@/components/bev/CascadeGraph";
@@ -58,17 +57,6 @@ type Engine =
 
 interface Custom { text: string; route: RouteResult; seeds: Seed[] }
 type Tab = "worlds" | "view" | "cascade" | "console";
-
-function Clock() {
-  const [now, setNow] = useState("");
-  useEffect(() => {
-    const f = () => setNow(new Date().toISOString().replace("T", " ").slice(0, 19) + "Z");
-    f();
-    const id = setInterval(f, 1000);
-    return () => clearInterval(id);
-  }, []);
-  return <span className="rec">REC {now}</span>;
-}
 
 export default function Console() {
   const { data } = useJson<DemoResults>("demo_results.json");
@@ -487,28 +475,12 @@ export default function Console() {
   return (
     <div className="fixed inset-0 flex flex-col overflow-hidden bg-[var(--bg)]">
       {/* header */}
-      <header className="flex flex-none flex-wrap items-center gap-x-4 gap-y-1 border-b hairline px-3 py-2 sm:px-4">
-        <div className="flex items-center gap-2.5">
-          <Mark size={30} />
-          <div>
-            <h1 className="hud-title text-[15px] leading-none sm:text-[17px]">Butterfly <span className="accent">Eye View</span></h1>
-            <p className="classif mt-0.5 !text-[9.5px]">Consequence intel // 10 worlds // labelled sources</p>
-          </div>
-        </div>
-        <nav className="hidden items-center gap-1 md:flex" aria-label="Main">
-          <Link href="/briefing#worlds" className="hbtn !py-1 !text-[10px]">§ World stack</Link>
-          <Link href="/chat" className="hbtn !py-1 !text-[10px]">Chat</Link>
-          <Link href="/scenarios" className="hbtn !py-1 !text-[10px]">E1 Scenarios</Link>
-          <Link href="/inference" className="hbtn !py-1 !text-[10px]">E2 What next?</Link>
-          <Link href="/lab" className="hbtn !py-1 !text-[10px]">E3 Lab</Link>
-          <Link href="/classic" className="hbtn !py-1 !text-[10px]">Classic</Link>
-        </nav>
-        <div className="ml-auto text-right">
-          <p className="mono text-[10.5px] tracking-wider"><Clock /></p>
-          <p className="mono text-[10px] tracking-wider" style={{ color: !live.checked ? "var(--text-faint)" : live.text ? "var(--good)" : "var(--warn)" }} title={live.reason}>
-            ACMP · STANDALONE
-          </p>
-        </div>
+      <header className="flex flex-none flex-wrap items-center gap-x-4 gap-y-1.5 border-b hairline px-3 pb-2 pt-3 sm:px-4">
+        <Brand />
+        <p className="mono ml-auto hidden text-[10px] tracking-wider sm:block" style={{ color: !live.checked ? "var(--text-faint)" : live.text ? "var(--good)" : "var(--warn)" }} title={live.reason}>
+          ● STANDALONE
+        </p>
+        <div className="w-full min-w-0"><MainNav /></div>
         <div className="flex w-full gap-1 lg:hidden" role="tablist" aria-label="Panels">
           {(["worlds", "view", "cascade", "console"] as Tab[]).map((t) => (
             <button key={t} type="button" role="tab" aria-selected={tab === t} className="hbtn flex-1 !py-1 !text-[10px]" aria-pressed={tab === t} onClick={() => setTab(t)}>{t}</button>

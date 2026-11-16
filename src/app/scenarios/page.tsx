@@ -90,7 +90,7 @@ export default function Scenarios() {
 
   return (
     <PageShell>
-      <p className="classif">Experiment E1 // scenario engine // the human world</p>
+      <p className="classif">3 · How it solves it // Scenario engine // the human world</p>
       <h1 className="mt-2 text-4xl font-semibold sm:text-5xl">People react through goals, <span className="accent">not physics.</span></h1>
       <p className="dim mt-3 max-w-3xl text-lg">A scenario is written like a movie script. The engine computes the status after every line (who owns what, who knows what, who objects), the consequences per world, and possible next scenes.</p>
       <Plain>It reads a scene like a film script, keeps score of what changed after each line, and suggests what could happen in the next scene, always saying what it assumed.</Plain>

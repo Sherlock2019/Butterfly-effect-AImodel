@@ -144,7 +144,7 @@ export default function Lab() {
   const obj = LIBRARY.find((o) => o.id === target)!;
   return (
     <PageShell>
-      <p className="classif">Experiment E3 // physics lab // mockup of the physical world&apos;s engine</p>
+      <p className="classif">3 · How it solves it // Physics lab // mockup of the physical world&apos;s engine</p>
       <h1 className="mt-2 text-4xl font-semibold sm:text-5xl">1 actor · 1 action · <span className="accent">simulated, not guessed.</span></h1>
       <p className="dim mt-3 max-w-3xl text-lg">A 2D rigid-body engine (matter.js) stands in for Unreal Engine 5&apos;s Chaos physics. Object properties come from a library and are assumed, not measured. Each simulated event becomes a consequence in its world.</p>
       <Plain>Choose who does what to which object. The computer plays it out with real physics (gravity, friction, bounce) and tells you what broke, what was heard, and what it can&apos;t know yet.</Plain>
@@ -190,7 +190,7 @@ export default function Lab() {
               {[...new Set(events.map((e) => e.world))].map((w) => <WorldTag key={w} id={w} />)}
             </div>
           )}
-          <p className="faint mt-4 text-[11.5px]">Next: Unreal Engine 5 behind the same interface (Chaos physics, Physical Materials, Sequencer renders compared with reality). <Link href="/briefing#next" className="accent">What next →</Link></p>
+          <p className="faint mt-4 text-[11.5px]">Next: Unreal Engine 5 behind the same interface (Chaos physics, Physical Materials, Sequencer renders compared with reality). <Link href="/next" className="accent">What next →</Link></p>
         </section>
       </div>
     </PageShell>
