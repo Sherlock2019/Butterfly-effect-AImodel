@@ -7,11 +7,11 @@ import { Mark } from "./ui";
 
 /** The four sections of the site, in reading order. */
 export const SECTIONS = [
-  { href: "/briefing", label: "What problem does this solve?", short: "Problem", n: "1", match: ["/briefing"] },
-  { href: "/what", label: "What is it?", short: "What", n: "2", match: ["/what"] },
-  { href: "/how", label: "How it solves it", short: "How", n: "3", match: ["/how", "/scenarios", "/inference", "/lab"] },
-  { href: "/", label: "Test it", short: "Test it", n: "4", match: ["/"] },
-  { href: "/next", label: "What next", short: "Next", n: "5", match: ["/next"] },
+  { href: "/briefing", label: "What problem does this solve?", short: "Problem", n: "1", match: ["/briefing"], c: "var(--action)" },
+  { href: "/what", label: "What is it?", short: "What", n: "2", match: ["/what"], c: "var(--accent)" },
+  { href: "/how", label: "How it solves it", short: "How", n: "3", match: ["/how", "/scenarios", "/inference", "/lab"], c: "#22c88a" },
+  { href: "/", label: "Test it", short: "Test it", n: "4", match: ["/"], c: "var(--amber)" },
+  { href: "/next", label: "What next", short: "Next", n: "5", match: ["/next"], c: "var(--w-media)" },
 ];
 
 /** The parts of "How it solves it": the overview, then each engine working on its own page. */
@@ -68,17 +68,24 @@ export function Brand() {
   );
 }
 
-/** The four numbered sections. Labels shorten on narrow screens. */
+/**
+ * The five numbered sections, each in its own colour: a coloured number badge, coloured label and
+ * tinted outline; the current page is filled with its colour. Labels shorten on narrow screens.
+ */
 export function MainNav() {
   const path = usePathname() ?? "/";
   return (
-    <nav className="flex min-w-0 items-center gap-0.5 overflow-x-auto md:gap-1" aria-label="Main">
+    <nav className="flex min-w-0 items-center gap-0.5 overflow-x-auto py-0.5 sm:gap-1 md:flex-wrap md:gap-1.5" aria-label="Main">
       {SECTIONS.map((s) => {
         const on = isOn(path, s.match);
+        const dark = "#07080d";
+        const style: React.CSSProperties = on
+          ? { background: s.c, borderColor: s.c, color: dark, boxShadow: `0 0 22px -6px ${s.c}` }
+          : { color: s.c, borderColor: `color-mix(in srgb, ${s.c} 50%, transparent)`, background: `color-mix(in srgb, ${s.c} 10%, transparent)` };
         return (
-          <Link key={s.href} href={s.href} aria-current={on ? "page" : undefined}
-            className={`mono whitespace-nowrap rounded-lg px-1.5 py-1.5 text-[10.5px] uppercase tracking-[.04em] md:px-2.5 md:text-[11px] md:tracking-[.1em] ${on ? "bg-[var(--accent-dim)] text-[var(--accent)]" : "dim hover:text-[var(--text)]"}`}>
-            <span className={`mr-1 md:mr-1.5 ${on ? "" : "faint"}`}>{s.n}</span>
+          <Link key={s.href} href={s.href} aria-current={on ? "page" : undefined} style={style}
+            className="mono flex items-center whitespace-nowrap rounded-lg border px-1 py-1 text-[11.5px] font-semibold uppercase tracking-normal transition hover:brightness-125 md:px-2.5 md:py-1.5 md:text-[15px] md:tracking-[.05em] xl:rounded-xl xl:px-3 xl:text-[20px] xl:tracking-[.03em]">
+            <span className="mr-1 rounded px-1 font-bold leading-snug md:mr-2 md:px-1.5" style={on ? { background: dark, color: s.c } : { background: s.c, color: dark }}>{s.n}</span>
             <span className="hidden md:inline">{s.label}</span>
             <span className="md:hidden">{s.short}</span>
           </Link>
