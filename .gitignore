@@ -1,0 +1,11 @@
+node_modules/
+public/cesium/
+public/havok/
+.next/
+logs/
+.run/
+next-env.d.ts
+tsconfig.tsbuildinfo
+.test-build/
+.env*
+*.pem
