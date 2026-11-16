@@ -43,8 +43,8 @@ export default function Briefing() {
         <article className="min-w-0 max-w-[880px]">
           <header className="rise">
             <p className="classif">1 // What problem does this solve?</p>
-            <h1 className="mt-3 text-4xl font-semibold leading-[1.05] sm:text-6xl">AI predicts the next word,<br /><span className="accent">not the NEXT WORLD.</span></h1>
-            <p className="mt-4 text-2xl font-semibold leading-snug sm:text-3xl">Not the consequences of an action in <span className="accent">all layers of our World.</span></p>
+            <h1 className="mt-3 text-4xl font-semibold leading-[1.05] sm:text-6xl">AI predicts the next word,<br /><span className="accent">We predict the next World</span></h1>
+            <p className="mt-4 text-2xl font-semibold leading-snug sm:text-3xl">by predicting the consequences of an action in <span className="accent">each layer of our Reality.</span></p>
             <p className="dim mt-5 max-w-2xl text-lg leading-relaxed">
               AI agents are starting to act: they move money, change systems and post content. But a language model only predicts the next <i>word</i>. It does not track what an action <b className="text-[var(--text)]">changes</b>, for whom or where, and it rarely says &ldquo;I don&apos;t know&rdquo;.
               Butterfly Effect Prediction predicts what one action changes across ten worlds, with the rule behind every step.
