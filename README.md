@@ -1,4 +1,4 @@
-# ACMP · Butterfly Eye View
+# World-Wide-Effect-Prediction Model  WEP Model  · Butterfly  Effect Model 
 
 **1 actor · 1 action = consequences in cascade.** Pick a scenario or write an action: ACMP shows the
 world it directly impacts (a red action pulse in that world's own view), then the possible
