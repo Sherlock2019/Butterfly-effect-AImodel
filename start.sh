@@ -11,6 +11,27 @@ mkdir -p "$ROOT/logs"
 
 pid_on_port() { ss -ltnp 2>/dev/null | grep -E ":$PORT\b" | grep -oE 'pid=[0-9]+' | head -1 | cut -d= -f2; }
 
+# Public address for links from another machine. Order: ACMP_PUBLIC_HOST (an IP or a DNS name, e.g.
+# an Elastic IP or a domain) → EC2 instance metadata (IMDSv2, then v1; works without internet) →
+# checkip.amazonaws.com → api.ipify.org. Prints nothing if none answers with an IPv4 address.
+public_host() {
+    if [[ -n "${ACMP_PUBLIC_HOST:-}" ]]; then echo "$ACMP_PUBLIC_HOST"; return; fi
+    local ip="" token=""
+    token="$(curl -s --max-time 2 -X PUT http://169.254.169.254/latest/api/token \
+        -H 'X-aws-ec2-metadata-token-ttl-seconds: 60' 2>/dev/null || true)"
+    if [[ -n "$token" ]]; then
+        ip="$(curl -s --max-time 2 -H "X-aws-ec2-metadata-token: $token" \
+            http://169.254.169.254/latest/meta-data/public-ipv4 2>/dev/null || true)"
+    fi
+    [[ "$ip" =~ ^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+$ ]] || \
+        ip="$(curl -s --max-time 2 http://169.254.169.254/latest/meta-data/public-ipv4 2>/dev/null || true)"
+    [[ "$ip" =~ ^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+$ ]] || \
+        ip="$(curl -s --max-time 3 https://checkip.amazonaws.com 2>/dev/null | tr -d '[:space:]' || true)"
+    [[ "$ip" =~ ^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+$ ]] || \
+        ip="$(curl -s --max-time 3 https://api.ipify.org 2>/dev/null | tr -d '[:space:]' || true)"
+    [[ "$ip" =~ ^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+$ ]] && echo "$ip" || true
+}
+
 status() {
     local pid; pid="$(pid_on_port || true)"
     if [[ -n "$pid" ]]; then echo "ACMP    running  http://127.0.0.1:$PORT/  (pid $pid)"; else echo "ACMP    stopped"; fi
@@ -37,8 +58,9 @@ start() {
     [[ -d node_modules/next && -f public/cesium/Cesium.js ]] || npm install --no-audit --no-fund
     rm -rf .next/dev
     echo "starting ACMP on :$PORT (fresh build)…"
-    local origins
-    origins="$(curl -s --max-time 3 https://checkip.amazonaws.com 2>/dev/null | tr -d '[:space:]' || true),$(hostname -I 2>/dev/null | tr ' ' ',')"
+    local origins public_ip
+    public_ip="$(public_host)"
+    origins="$public_ip,$(hostname -I 2>/dev/null | tr ' ' ',')"
     ACMP_ALLOWED_DEV_ORIGINS="${ACMP_ALLOWED_DEV_ORIGINS:-$origins}" setsid nohup npx next dev -p "$PORT" -H 0.0.0.0 > "$LOG" 2>&1 < /dev/null &
     # wait until the console page has compiled and answers 200 (first compile can take a while)
     local code=000
@@ -55,6 +77,18 @@ start() {
     echo "  World stack            http://127.0.0.1:$PORT/briefing#worlds"
     echo "  Recorded examples      /chat · /scenarios · /inference · /lab · /classic"
     echo "  Logs                   $LOG"
+    echo
+    if [[ -n "$public_ip" ]]; then
+        echo "Public links (from any browser; open inbound TCP $PORT in the security group / firewall):"
+        echo "  Console (start here)   http://$public_ip:$PORT/"
+        echo "  A scenario             http://$public_ip:$PORT/?scenario=lightning_datacenter"
+        echo "  World stack            http://$public_ip:$PORT/briefing#worlds"
+        echo "  No login: anyone who can reach this address can use ACMP."
+    else
+        echo "Public links: no public IP detected. Set it and restart, e.g."
+        echo "  ACMP_PUBLIC_HOST=<public-ip-or-dns> ./start.sh"
+    fi
+    echo
     status
 }
 

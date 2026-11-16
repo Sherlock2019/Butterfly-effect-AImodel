@@ -370,6 +370,11 @@ Try these three:
 3. Open **Physical World › Quantum** to watch the double-slit fringes build up. Then switch on the
    which-path detector.
 
+**On a server (e.g. AWS EC2):** `./start.sh` listens on all interfaces and prints **Public links**
+(`http://<public-ip>:3020/`). It finds the public IP from the EC2 instance metadata, or from a public
+lookup. Open inbound TCP 3020 in the security group. For an Elastic IP or a domain, set it yourself:
+`ACMP_PUBLIC_HOST=<ip-or-dns> ./start.sh`. There is no login: anyone who reaches the address can use it.
+
 **More commands:**
 - `./start.sh status` · `./start.sh stop` · `./start.sh test`
 - Optional: start NPLM at `NPLM_URL` (default `http://127.0.0.1:8001`) for live phrase translation.
