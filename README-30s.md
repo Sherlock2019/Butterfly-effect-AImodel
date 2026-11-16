@@ -32,3 +32,7 @@ Try **“Lightning strikes an AI data center”**. Investors: [the ask](README.m
 **WHAT NEXT.** Build a full **Action Prediction Model**: train it, test it, evaluate it, then improve and
 retrain it. Collaborate with AI frontier labs and sell to them. We need engineers:
 [profile](https://dzoannguyentran.jobsmatchnow.com/#projects) · [WhatsApp](https://wa.me/84908618075)
+
+---
+
+**Made with love by [DzoanNguyentran@gmail.com](mailto:DzoanNguyentran@gmail.com) · A better World Builder**

@@ -464,3 +464,5 @@ modelling, AI agents, and economic and earth modelling. Each world needs a real 
 ---
 
 © 2026 Dzoan Nguyen Tran · MIT
+
+**Made with love by [DzoanNguyentran@gmail.com](mailto:DzoanNguyentran@gmail.com) · A better World Builder**

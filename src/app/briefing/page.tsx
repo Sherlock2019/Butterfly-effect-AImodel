@@ -14,7 +14,7 @@ const TOC = [["why", "Words vs consequences"], ["sowhat", "Why it matters"]] as 
 
 function Sec({ id, n, title, kicker, children }: { id: string; n: string; title: string; kicker: string; children: React.ReactNode }) {
   return (
-    <section id={id} className="scroll-mt-36 border-t hairline py-14">
+    <section id={id} className="scroll-mt-44 border-t hairline py-14">
       <p className="classif">{n} // {title}</p>
       <h2 className="mt-2 text-3xl font-semibold leading-tight sm:text-4xl">{kicker}</h2>
       <div className="brief mt-6">{children}</div>
@@ -31,7 +31,7 @@ export default function Briefing() {
     <PageShell>
       <div className="grid gap-10 lg:grid-cols-[200px_minmax(0,1fr)]">
         <nav className="hidden lg:block" aria-label="Sections">
-          <div className="sticky top-36 flex flex-col gap-1">
+          <div className="sticky top-44 flex flex-col gap-1">
             <p className="hud-label mb-2">1 · What problem does this solve?</p>
             {TOC.map(([id, l]) => (
               <a key={id} href={`#${id}`} className="mono dim rounded px-2 py-1 text-[11.5px] uppercase tracking-wider hover:bg-white/5 hover:text-[var(--text)]">{l}</a>

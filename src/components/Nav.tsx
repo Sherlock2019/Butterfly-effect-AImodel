@@ -68,6 +68,19 @@ export function Brand() {
   );
 }
 
+export const AUTHOR_EMAIL = "DzoanNguyentran@gmail.com";
+
+/** The author's credit line, under the title (aligned with the title text) and in the footer. */
+export function Credit({ under = false }: { under?: boolean }) {
+  return (
+    <p className={`mono text-[11px] leading-snug tracking-[.04em] sm:text-[12px] lg:text-[13px] ${under ? "pl-[44px] lg:pl-[80px]" : ""}`}>
+      <span className="dim">Made with </span><span style={{ color: "var(--action)" }}>love</span><span className="dim"> by </span>
+      <a href={`mailto:${AUTHOR_EMAIL}`} className="accent underline decoration-dotted underline-offset-4 hover:brightness-125">{AUTHOR_EMAIL}</a>
+      <span className="dim"> · </span><span style={{ color: "var(--amber)" }}>A better World Builder</span>
+    </p>
+  );
+}
+
 /**
  * The five numbered sections, each in its own colour: a coloured number badge, coloured label and
  * tinted outline; the current page is filled with its colour. Labels shorten on narrow screens.
@@ -121,7 +134,7 @@ export function HudNav() {
   return (
     <header className="sticky top-0 z-40 border-b hairline" style={{ background: "rgba(7,8,13,.82)", backdropFilter: "blur(14px)" }}>
       <div className="mx-auto flex max-w-[1320px] flex-col gap-2 px-4 pb-2 pt-3 sm:px-6">
-        <Brand />
+        <div className="flex flex-col gap-1"><Brand /><Credit under /></div>
         <MainNav />
       </div>
       {isOn(path, SECTIONS[2].match) && <HowTabs />}
@@ -147,7 +160,10 @@ export function PageShell({ children }: { children: React.ReactNode }) {
       <main className="mx-auto max-w-[1320px] px-4 pb-24 pt-10 sm:px-6">{children}</main>
       <footer className="border-t hairline">
         <div className="faint mx-auto flex max-w-[1320px] flex-wrap items-center justify-between gap-3 px-4 py-6 text-xs sm:px-6">
-          <span>© 2026 Dzoan Nguyen Tran · MIT · Butterfly Effect Prediction (ACMP)</span>
+          <span className="flex flex-col gap-1">
+            <span>© 2026 Dzoan Nguyen Tran · MIT · Butterfly Effect Prediction (ACMP)</span>
+            <Credit />
+          </span>
           <span>
             Archive: <Link href="/chat" className="underline decoration-dotted underline-offset-2">recorded chat design</Link> ·{" "}
             <Link href="/classic" className="underline decoration-dotted underline-offset-2">classic console</Link>
