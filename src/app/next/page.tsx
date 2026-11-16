@@ -7,6 +7,7 @@ import { WorldTag } from "@/components/ui";
 import { CONTACT, WORLDS } from "@/lib/worlds";
 
 const ACM = "https://github.com/Sherlock2019/ACM";
+const ACM_DEMO = "http://100.31.100.157:3010/acm/home";
 
 const ROADMAP: [string, string, string[]][] = [
   ["Now", "next release", [
@@ -69,7 +70,7 @@ export default function Next() {
           <div className="glass-flat brackets p-5">
             <p className="hud-label">ACM is the decision gate</p>
             <p className="mt-2 text-[14.5px] leading-relaxed">
-              The sister project <a href={ACM} target="_blank" rel="noreferrer" className="accent underline decoration-dotted underline-offset-4">ACM · Action–Consequence Foresight Model</a> already does &ldquo;think before acting&rdquo; inside one environment at a time. It simulates each plan on a copy, checks the goal and 32 permanent rules, asks a human to approve one exact plan, executes it once, and compares the prediction with what is observed.
+              The sister project <a href={ACM} target="_blank" rel="noreferrer" className="accent underline decoration-dotted underline-offset-4">ACM · Action–Consequence Foresight Model</a> (<a href={ACM_DEMO} target="_blank" rel="noreferrer" className="accent underline decoration-dotted underline-offset-4">live demo ↗</a>) already does &ldquo;think before acting&rdquo; inside one environment at a time. It simulates each plan on a copy, checks the goal and 32 permanent rules, asks a human to approve one exact plan, executes it once, and compares the prediction with what is observed.
               Together, this app gives the <b>world view</b> (what an action can change, everywhere) and ACM gives the <b>decision gate</b> (check, ask, act once, verify).
             </p>
             <p className="faint mt-3 text-[13px]">Status: both are proofs of concept. Connecting real specialist models per world, and joining the world view to ACM&apos;s decision gate, are next steps.</p>

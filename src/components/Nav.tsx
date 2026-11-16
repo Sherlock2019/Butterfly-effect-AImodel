@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useRef, useState } from "react";
 import { Mark } from "./ui";
 
 /** The four sections of the site, in reading order. */
@@ -23,14 +24,45 @@ export const HOW_TABS = [
 
 const isOn = (path: string, match: string[]) => match.some((m) => (m === "/" ? path === "/" : path.startsWith(m)));
 
-/** The title, 3× the old 13px on desktop (39px), smaller on narrow screens so it always fits. */
-export function Brand() {
+/** Title letters, each riding the ripple a little later than the one before (see .bf-letter). */
+function Letters({ text, from, className }: { text: string; from: number; className?: string }) {
   return (
-    <Link href="/" className="flex min-w-0 flex-none items-center gap-3 lg:gap-4" aria-label="Butterfly Effect Prediction, home">
-      <span className="lg:hidden"><Mark size={32} /></span>
-      <span className="hidden lg:inline"><Mark size={64} /></span>
-      <span className="hud-title whitespace-nowrap text-[13.5px] leading-none !tracking-[.1em] sm:text-[24px] sm:!tracking-[.22em] lg:text-[39px]">
-        Butterfly <span className="accent">Effect Prediction</span>
+    <span className={className}>
+      {[...text].map((ch, i) => (
+        <span key={i} className="bf-letter" style={{ "--i": from + i } as React.CSSProperties}>{ch === " " ? " " : ch}</span>
+      ))}
+    </span>
+  );
+}
+
+/**
+ * The title, 3× the old 13px on desktop (39px), smaller on narrow screens so it always fits.
+ * Animation: the butterfly flies in and lands on the water, three rings spread under the title,
+ * and each letter bobs as the ripple passes. Plays on load and again on hover (at most every 3 s);
+ * with reduced motion it is a still title (globals.css).
+ */
+export function Brand() {
+  const [run, setRun] = useState(0);
+  const last = useRef(0);
+  const replay = () => {
+    const now = Date.now();
+    if (now - last.current > 3000) { last.current = now; setRun((r) => r + 1); }
+  };
+  const first = "Butterfly ";
+  return (
+    <Link href="/" onMouseEnter={replay} onFocus={replay}
+      className="relative flex min-w-0 flex-none items-center gap-3 [--bf-rw:420px] lg:gap-4 lg:[--bf-rw:1150px]"
+      aria-label="Butterfly Effect Prediction, home">
+      <span key={`m${run}`} className="relative inline-flex flex-none">
+        <span className="bf-ring" aria-hidden /><span className="bf-ring r2" aria-hidden /><span className="bf-ring r3" aria-hidden />
+        <span className="bf-fly relative"><span className="bf-beat">
+          <span className="lg:hidden"><Mark size={32} /></span>
+          <span className="hidden lg:inline"><Mark size={64} /></span>
+        </span></span>
+      </span>
+      <span key={`t${run}`} aria-hidden className="hud-title relative whitespace-nowrap text-[13.5px] leading-none !tracking-[.1em] sm:text-[24px] sm:!tracking-[.22em] lg:text-[39px]">
+        <Letters text={first} from={0} />
+        <Letters text="Effect Prediction" from={first.length} className="accent" />
       </span>
     </Link>
   );

@@ -15,6 +15,7 @@ import type { DemoResults } from "@/lib/types";
 import { CONTACT, ROUTING, WORLDS, color } from "@/lib/worlds";
 
 const ACM = "https://github.com/Sherlock2019/ACM";
+const ACM_DEMO = "http://100.31.100.157:3010/acm/home";
 
 const TOC = [
   ["shows", "What it shows"], ["worlds-sec", "Ten worlds"], ["family", "An extension of ACM"],
@@ -133,7 +134,7 @@ export default function What() {
 
           <Sec id="family" title="An extension of ACM" kicker="From the AI's digital world to the whole world.">
             <p>
-              This model extends our previous model, <a href={ACM} target="_blank" rel="noreferrer" className="accent underline decoration-dotted underline-offset-4">ACM · Action–Consequence Foresight Model</a>. ACM predicts the consequences of an AI agent&apos;s action <b>inside its own digital world</b>: it simulates each plan on a copy, checks it against the goal and permanent rules, asks a human to approve one exact plan, and compares the prediction with what happens. But an action rarely stays in one world, so this model predicts its effect on <b>every affected layer</b>.
+              This model extends our previous model, <a href={ACM} target="_blank" rel="noreferrer" className="accent underline decoration-dotted underline-offset-4">ACM · Action–Consequence Foresight Model</a> (<a href={ACM_DEMO} target="_blank" rel="noreferrer" className="accent underline decoration-dotted underline-offset-4">live demo ↗</a>). ACM predicts the consequences of an AI agent&apos;s action <b>inside its own digital world</b>: it simulates each plan on a copy, checks it against the goal and permanent rules, asks a human to approve one exact plan, and compares the prediction with what happens. But an action rarely stays in one world, so this model predicts its effect on <b>every affected layer</b>.
             </p>
             <div className="glass-flat my-6 overflow-x-auto">
               <table className="tbl">
