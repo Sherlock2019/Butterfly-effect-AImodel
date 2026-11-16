@@ -2,6 +2,31 @@
 
 **1 actor · 1 action = consequences in cascade.**
 
+> ### 👋 To Y Combinator and investors
+>
+> **1 · The problem.** AI agents are starting to act in the world, but language models predict the next
+> word, not the consequences of an action. They stop at the first effect, give a different answer each
+> time, and rarely say "I don't know". An agent that cannot foresee what its action changes cannot be
+> trusted to act.
+>
+> **2 · Our solution and where it stands.** Two working proofs of concept:
+> - **[ACM](https://github.com/Sherlock2019/ACM)** (our previous model) predicts the consequences of an AI
+>   agent's action inside its digital world. It checks them against the goal and 32 permanent rules, and
+>   asks a human to approve one exact plan before acting once and verifying the result.
+> - **ACMP** (this repository) extends it to a ten-layer world view, from Earth & Ecosystems down to the
+>   Physical World. One action produces a cascade of consequences across every affected layer, and each
+>   step is explained.
+>
+> Today, prototype rules and authored consequences stand in for trained models. ACMP has 22 scenarios, a 3D
+> scene for each and 49 tests, and it never invents a probability.
+>
+> **3 · What next.** We need resources and engineers to build a full, new **Action Prediction Model**:
+> train it, test it, evaluate it, then improve and retrain it in a loop. We also want to collaborate with
+> AI frontier labs and sell the model to them. See [My ask for investors](#my-ask-for-investors) and
+> [Build it with us](#build-it-with-us).
+>
+> *Draft: frontier labs as partners and customers is a hypothesis to validate. Amounts are placeholders.*
+
 ---
 
 ## WHY
@@ -52,18 +77,56 @@ where every step can be inspected, challenged and improved. ACMP is built to ans
 
 ## WHAT
 
+### An extension of ACM: from the AI's digital world to the whole world
+
+ACMP extends our previous model, **[ACM · Action–Consequence Foresight Model](https://github.com/Sherlock2019/ACM)**
+(`git@github.com:Sherlock2019/ACM.git`). ACM predicts the consequences of an AI agent's action **inside its
+own digital world**: it simulates each plan on a copy of the environment, checks it against the goal and
+permanent rules, asks a human to approve one exact plan, and then compares the prediction with what happens.
+
+But an action rarely stays in one world. ACMP widens the view: it is a **global prediction model** that
+predicts the effect of one action on **every affected layer** of a world-view model. The model has ten
+layers (called *worlds* in the console), from the top down:
+
+1. 🌍 Earth & Ecosystems
+2. 🏛️ Government, Politics & Military
+3. 📈 Society & Economy
+4. 🏢 Business & Institutions
+5. 📺 Social Media & News
+6. 🌐 Network & Communications
+7. 💻 Digital & IT Systems
+8. 🧠 Human & Animal Behaviour
+9. 👁️ Perception
+10. ⚙️ Physical World (scales: human, molecular, atomic, quantum)
+
+| | ACM (previous model) | ACMP (this project) |
+|---|---|---|
+| **Scope** | the AI agent's digital world, one environment at a time | all ten layers of the world view |
+| **Actor** | an AI agent | a person, an AI, an animal, a natural phenomenon or an organisation |
+| **Question** | is this plan safe to execute here? | what does this action change, in which layer, and what does that trigger next? |
+| **Output** | one approved plan, executed once, then verified | a cascade of consequences across layers, each step explained |
+
+ACM's digital world corresponds to ACMP's 💻 Digital & IT Systems layer: ACMP keeps it and adds the nine
+others around it.
+
+### What ACMP does
+
 ACMP (Butterfly Eye View) is a consequence explorer. You describe one action, or pick one of 22 ready-made
 scenarios. The actor can be a person, an AI, an animal, a natural phenomenon or an organisation. ACMP then shows:
 
-- **where the action lands first**: the world it directly impacts, marked with a red action pulse;
-- **how it may ripple on** across ten worlds, from Earth & Ecosystems down to the Physical World (including
-  its molecular, atomic and quantum scales);
+- **where the action lands first**: the layer it directly impacts, marked with a red action pulse;
+- **how it may ripple on** across the ten layers, from Earth & Ecosystems down to the Physical World
+  (including its molecular, atomic and quantum scales);
 - **why each consequence appears**: the rule or note behind it, its assumptions, and where it comes from;
 - **the action itself in 3D**: a real-time Babylon.js + Havok scene for every scenario, plus a double-slit
   experiment in the Quantum view.
 
 It is a working proof of concept. It runs entirely from this repository on one laptop, with no cloud
 service, API key or external AI.
+
+**What it is not (yet):** a calibrated forecaster (it never gives a probability), a source of live data
+(market and indicator values are fictional), or an executor (it explains consequences; it does not act,
+which is ACM's role).
 
 ## SO WHAT: benefits and business value
 
@@ -179,17 +242,7 @@ npm run build              # next build
 
 #### The ten worlds
 
-From the top down:
-1. 🌍 Earth & Ecosystems
-2. 🏛️ Government, Politics & Military
-3. 📈 Society & Economy
-4. 🏢 Business & Institutions
-5. 📺 Social Media & News
-6. 🌐 Network & Communications
-7. 💻 Digital & IT Systems
-8. 🧠 Human & Animal Behaviour
-9. 👁️ Perception
-10. ⚙️ Physical World (scales: human, molecular, atomic, quantum)
+The ten layers are listed in [WHAT](#what) (ids in `src/lib/worlds.ts`).
 
 **Action** (red) and **Prediction routing** are not worlds. The order is for reading: a consequence can
 connect any two worlds directly.
