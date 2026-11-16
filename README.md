@@ -162,8 +162,7 @@ which is ACM's role).
 ### Technical details
 
 ACMP is a **standalone** project: everything runs from this repository, with no external engine, API or
-proxy. The interface style is adapted from
-[God's Eye View](https://github.com/bilawalsidhu/gods-eye-view) (MIT, © 2026 Bilawal Sidhu).
+proxy. The interface style is a global view of all world layers like an 7 ISO layers model
 
 ```bash
 ./start.sh                 # → http://127.0.0.1:3020/   (stop | status | restart | build | test)
