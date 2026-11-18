@@ -37,7 +37,8 @@ function Letters({ text, from, className }: { text: string; from: number; classN
 }
 
 /**
- * The title "Butterfly Effect Prediction Models": 40px on desktop (24px tablet, 13px phone so it still fits on one line).
+ * The title "Butterfly Effect Prediction Models": 26px on desktop (20px tablet, 13px phone so it still fits on one line).
+ * Header scale (desktop): credit 11 · nav 12.5 · headline line 1 20 · title 26 · headline line 2 44 · Earth 96.
  * Animation: the butterfly flies in and lands on the water, three rings spread under the title,
  * and each letter bobs as the ripple passes. Plays on load and again on hover (at most every 3 s);
  * with reduced motion it is a still title (globals.css).
@@ -57,11 +58,11 @@ export function Brand() {
       <span key={`m${run}`} className="relative inline-flex flex-none">
         <span className="bf-ring" aria-hidden /><span className="bf-ring r2" aria-hidden /><span className="bf-ring r3" aria-hidden /><span className="bf-ring r4" aria-hidden />
         <span className="bf-fly relative"><span className="bf-beat">
-          <span className="lg:hidden"><Mark size={44} /></span>
-          <span className="hidden lg:inline"><Mark size={72} /></span>
+          <span className="lg:hidden"><Mark size={36} /></span>
+          <span className="hidden lg:inline"><Mark size={48} /></span>
         </span></span>
       </span>
-      <span key={`t${run}`} aria-hidden className="hud-title relative whitespace-nowrap text-[13px] leading-none !tracking-[.05em] sm:text-[24px] sm:!tracking-[.12em] lg:text-[40px] lg:!tracking-[.14em]">
+      <span key={`t${run}`} aria-hidden className="hud-title relative whitespace-nowrap text-[13px] leading-none !tracking-[.05em] sm:text-[20px] sm:!tracking-[.12em] lg:text-[26px] lg:!tracking-[.14em]">
         <Letters text={first} from={0} />
         <Letters text="Effect Prediction Models" from={first.length} className="accent" />
       </span>
@@ -70,18 +71,18 @@ export function Brand() {
 }
 
 /**
- * The headline beside the title: "AI LLM predicts the next Word," at the size of a page heading (48px
- * desktop) and under it, bigger (72px), "We predict the next World", with a big rotating Earth beside
+ * The headline under the title: a quieter first line "AI LLM predicts the next Word," (20px desktop)
+ * and under it the hero line "We predict the next World" (44px), with a rotating Earth (96px) beside
  * both lines. `compact` is the console's smaller version, so its panels keep their room.
  */
 export function Tagline({ className = "", compact = false }: { className?: string; compact?: boolean }) {
-  const l1 = compact ? "text-[16px]" : "text-[22px] sm:text-5xl";
-  const l2 = compact ? "text-[30px]" : "text-[32px] sm:text-[52px] lg:text-[72px]";
-  const g = compact ? "h-16 w-16" : "h-20 w-20 sm:h-28 sm:w-28 lg:h-36 lg:w-36";
+  const l1 = compact ? "text-[13px]" : "text-[15px] sm:text-[18px] lg:text-[20px]";
+  const l2 = compact ? "text-[24px]" : "text-[26px] sm:text-[36px] lg:text-[44px]";
+  const g = compact ? "h-14 w-14" : "h-16 w-16 sm:h-20 sm:w-20 lg:h-24 lg:w-24";
   return (
-    <p className={`flex items-center gap-5 font-semibold ${className}`}>
-      <span className="flex min-w-0 flex-col gap-2">
-        <span className={`leading-tight ${l1}`}>AI LLM predicts the next Word,</span>
+    <p className={`flex items-center gap-4 font-semibold ${className}`}>
+      <span className="flex min-w-0 flex-col gap-1.5">
+        <span className={`dim leading-tight ${l1}`}>AI LLM predicts the next Word,</span>
         <span className={`accent leading-none lg:whitespace-nowrap ${l2}`}>We predict the next <span className="font-bold">World</span></span>
       </span>
       <SpinGlobe className={`flex-none ${g}`} />
@@ -94,7 +95,7 @@ export const AUTHOR_EMAIL = "DzoanNguyentran@gmail.com";
 /** The author's credit line, under the title (aligned with the title text) and in the footer. */
 export function Credit({ under = false }: { under?: boolean }) {
   return (
-    <p className={`mono text-[10.5px] leading-snug tracking-[.04em] sm:text-[11px] ${under ? "pl-[56px] lg:pl-[88px]" : ""}`}>
+    <p className={`mono text-[10.5px] leading-snug tracking-[.04em] sm:text-[11px] ${under ? "pl-[48px] lg:pl-[64px]" : ""}`}>
       <span className="dim">Made with </span><span style={{ color: "var(--action)" }}>love</span><span className="dim"> by </span>
       <a href={`mailto:${AUTHOR_EMAIL}`} className="accent underline decoration-dotted underline-offset-4 hover:brightness-125">{AUTHOR_EMAIL}</a>
       <span className="dim"> · </span><span style={{ color: "var(--amber)" }}>A better World Builder</span>
@@ -162,7 +163,7 @@ export function HudNav() {
       <div className="mx-auto flex max-w-[1320px] flex-col gap-3 px-4 pb-2.5 pt-4 sm:px-6">
         <div className="flex flex-wrap items-center justify-between gap-x-8 gap-y-3">
           <div className="flex min-w-0 flex-col gap-1"><Brand /><Credit under /></div>
-          <Tagline />
+          <Tagline className="sm:pl-[48px] lg:pl-[64px]" />
         </div>
         <MainNav />
       </div>
