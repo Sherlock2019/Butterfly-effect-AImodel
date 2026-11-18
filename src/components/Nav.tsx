@@ -36,7 +36,7 @@ function Letters({ text, from, className }: { text: string; from: number; classN
 }
 
 /**
- * The title, 3× the old 13px on desktop (39px), smaller on narrow screens so it always fits.
+ * The title: compact (20px on desktop, smaller on narrow screens) so the header stays slim.
  * Animation: the butterfly flies in and lands on the water, three rings spread under the title,
  * and each letter bobs as the ripple passes. Plays on load and again on hover (at most every 3 s);
  * with reduced motion it is a still title (globals.css).
@@ -51,16 +51,16 @@ export function Brand() {
   const first = "Butterfly ";
   return (
     <Link href="/" onMouseEnter={replay} onFocus={replay}
-      className="relative flex min-w-0 flex-none items-center gap-3 [--bf-rw:420px] lg:gap-4 lg:[--bf-rw:1150px]"
+      className="relative flex min-w-0 flex-none items-center gap-3 [--bf-rw:260vw]"
       aria-label="Butterfly Effect Prediction, home">
       <span key={`m${run}`} className="relative inline-flex flex-none">
-        <span className="bf-ring" aria-hidden /><span className="bf-ring r2" aria-hidden /><span className="bf-ring r3" aria-hidden />
+        <span className="bf-ring" aria-hidden /><span className="bf-ring r2" aria-hidden /><span className="bf-ring r3" aria-hidden /><span className="bf-ring r4" aria-hidden />
         <span className="bf-fly relative"><span className="bf-beat">
-          <span className="lg:hidden"><Mark size={32} /></span>
-          <span className="hidden lg:inline"><Mark size={64} /></span>
+          <span className="lg:hidden"><Mark size={28} /></span>
+          <span className="hidden lg:inline"><Mark size={36} /></span>
         </span></span>
       </span>
-      <span key={`t${run}`} aria-hidden className="hud-title relative whitespace-nowrap text-[13.5px] leading-none !tracking-[.1em] sm:text-[24px] sm:!tracking-[.22em] lg:text-[39px]">
+      <span key={`t${run}`} aria-hidden className="hud-title relative whitespace-nowrap text-[13px] leading-none !tracking-[.12em] sm:text-[16px] sm:!tracking-[.18em] lg:text-[20px]">
         <Letters text={first} from={0} />
         <Letters text="Effect Prediction" from={first.length} className="accent" />
       </span>
@@ -73,7 +73,7 @@ export const AUTHOR_EMAIL = "DzoanNguyentran@gmail.com";
 /** The author's credit line, under the title (aligned with the title text) and in the footer. */
 export function Credit({ under = false }: { under?: boolean }) {
   return (
-    <p className={`mono text-[11px] leading-snug tracking-[.04em] sm:text-[12px] lg:text-[13px] ${under ? "pl-[44px] lg:pl-[80px]" : ""}`}>
+    <p className={`mono text-[10.5px] leading-snug tracking-[.04em] sm:text-[11px] ${under ? "pl-[40px] lg:pl-[48px]" : ""}`}>
       <span className="dim">Made with </span><span style={{ color: "var(--action)" }}>love</span><span className="dim"> by </span>
       <a href={`mailto:${AUTHOR_EMAIL}`} className="accent underline decoration-dotted underline-offset-4 hover:brightness-125">{AUTHOR_EMAIL}</a>
       <span className="dim"> · </span><span style={{ color: "var(--amber)" }}>A better World Builder</span>
@@ -82,8 +82,8 @@ export function Credit({ under = false }: { under?: boolean }) {
 }
 
 /**
- * The five numbered sections, each in its own colour: a coloured number badge, coloured label and
- * tinted outline; the current page is filled with its colour. Labels shorten on narrow screens.
+ * The five numbered sections in one neon-blue (--accent) style: muted labels that turn blue on hover,
+ * and the current page outlined and softly glowing in blue. Labels shorten on narrow screens.
  */
 export function MainNav() {
   const path = usePathname() ?? "/";
@@ -91,14 +91,19 @@ export function MainNav() {
     <nav className="flex min-w-0 items-center gap-0.5 overflow-x-auto py-0.5 sm:gap-1 md:flex-wrap md:gap-1.5" aria-label="Main">
       {SECTIONS.map((s) => {
         const on = isOn(path, s.match);
-        const dark = "#07080d";
+        const neon = "var(--accent)";
         const style: React.CSSProperties = on
-          ? { background: s.c, borderColor: s.c, color: dark, boxShadow: `0 0 22px -6px ${s.c}` }
-          : { color: s.c, borderColor: `color-mix(in srgb, ${s.c} 50%, transparent)`, background: `color-mix(in srgb, ${s.c} 10%, transparent)` };
+          ? {
+              color: neon,
+              borderColor: `color-mix(in srgb, ${neon} 70%, transparent)`,
+              background: `color-mix(in srgb, ${neon} 12%, transparent)`,
+              boxShadow: `0 0 18px -6px ${neon}, inset 0 0 12px -8px ${neon}`,
+            }
+          : { borderColor: "transparent" };
         return (
           <Link key={s.href} href={s.href} aria-current={on ? "page" : undefined} style={style}
-            className="mono flex items-center whitespace-nowrap rounded-lg border px-1 py-1 text-[11.5px] font-semibold uppercase tracking-normal transition hover:brightness-125 md:px-2.5 md:py-1.5 md:text-[15px] md:tracking-[.05em] xl:rounded-xl xl:px-3 xl:text-[20px] xl:tracking-[.03em]">
-            <span className="mr-1 rounded px-1 font-bold leading-snug md:mr-2 md:px-1.5" style={on ? { background: dark, color: s.c } : { background: s.c, color: dark }}>{s.n}</span>
+            className={`mono flex items-center whitespace-nowrap rounded-md border px-2 py-1 text-[11px] font-medium uppercase tracking-[.06em] transition md:px-3 md:py-1.5 md:text-[12.5px] md:tracking-[.08em] ${on ? "" : "dim hover:!border-[color:color-mix(in_srgb,var(--accent)_35%,transparent)] hover:text-[var(--accent)]"}`}>
+            <span className="mr-1.5 font-semibold tabular-nums md:mr-2" style={{ color: neon, opacity: on ? 1 : 0.7 }}>{`0${s.n}`}</span>
             <span className="hidden md:inline">{s.label}</span>
             <span className="md:hidden">{s.short}</span>
           </Link>
@@ -133,7 +138,7 @@ export function HudNav() {
   const path = usePathname() ?? "/";
   return (
     <header className="sticky top-0 z-40 border-b hairline" style={{ background: "rgba(7,8,13,.82)", backdropFilter: "blur(14px)" }}>
-      <div className="mx-auto flex max-w-[1320px] flex-col gap-2 px-4 pb-2 pt-3 sm:px-6">
+      <div className="mx-auto flex max-w-[1320px] flex-col gap-3 px-4 pb-2.5 pt-4 sm:px-6">
         <div className="flex flex-col gap-1"><Brand /><Credit under /></div>
         <MainNav />
       </div>

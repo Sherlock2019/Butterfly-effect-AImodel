@@ -43,9 +43,21 @@ status() {
 stop() {
     local pid; pid="$(pid_on_port || true)"
     if [[ -n "$pid" ]]; then
-        # stop by port, never by process name: other Next apps may be running
-        kill "$pid" 2>/dev/null || true
+        # stop by port, never by process name: other Next apps may be running. start() launches next
+        # with setsid, so the listener's process group holds next's workers too: stop the whole group,
+        # or a worker keeps writing .next/dev/cache after the port closes.
+        local pgid; pgid="$(ps -o pgid= -p "$pid" 2>/dev/null | tr -d ' ' || true)"
+        if [[ -n "$pgid" && "$pgid" != "$(ps -o pgid= -p $$ | tr -d ' ')" ]]; then
+            kill -- "-$pgid" 2>/dev/null || kill "$pid" 2>/dev/null || true
+        else
+            kill "$pid" 2>/dev/null || true
+        fi
         for _ in $(seq 1 20); do [[ -z "$(pid_on_port || true)" ]] && break; sleep 0.5; done
+        # wait for the rest of the group (workers) to exit; force it after ~5 s
+        if [[ -n "$pgid" ]]; then
+            for _ in $(seq 1 10); do pgrep -g "$pgid" >/dev/null 2>&1 || break; sleep 0.5; done
+            pgrep -g "$pgid" >/dev/null 2>&1 && kill -9 -- "-$pgid" 2>/dev/null || true
+        fi
         echo "ACMP stopped"
     else
         echo "ACMP not running"
@@ -56,7 +68,9 @@ start() {
     # always a fresh launch: stop a running copy, clear the dev build cache, rebuild on start
     if [[ -n "$(pid_on_port || true)" ]]; then stop; fi
     [[ -d node_modules/next && -f public/cesium/Cesium.js ]] || npm install --no-audit --no-fund
-    rm -rf .next/dev
+    # retry: a just-stopped dev server can still be flushing its cache for a moment
+    for _ in 1 2 3 4 5; do rm -rf .next/dev 2>/dev/null && break; sleep 1; done
+    if [[ -e .next/dev ]]; then echo "could not clear .next/dev (is another next dev using this folder?)" >&2; return 1; fi
     echo "starting ACMP on :$PORT (fresh build)…"
     local origins public_ip
     public_ip="$(public_host)"
