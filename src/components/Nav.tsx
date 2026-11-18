@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useRef, useState } from "react";
+import { SpinGlobe } from "./SpinGlobe";
 import { Mark } from "./ui";
 
 /** The four sections of the site, in reading order. */
@@ -36,7 +37,7 @@ function Letters({ text, from, className }: { text: string; from: number; classN
 }
 
 /**
- * The title: compact (20px on desktop, smaller on narrow screens) so the header stays slim.
+ * The title: 40px on desktop (28px tablet, 18px phone so it still fits on one line).
  * Animation: the butterfly flies in and lands on the water, three rings spread under the title,
  * and each letter bobs as the ripple passes. Plays on load and again on hover (at most every 3 s);
  * with reduced motion it is a still title (globals.css).
@@ -51,20 +52,33 @@ export function Brand() {
   const first = "Butterfly ";
   return (
     <Link href="/" onMouseEnter={replay} onFocus={replay}
-      className="relative flex min-w-0 flex-none items-center gap-3 [--bf-rw:260vw]"
+      className="relative flex min-w-0 flex-none items-center gap-3 [--bf-rw:260vw] lg:gap-4"
       aria-label="Butterfly Effect Prediction, home">
       <span key={`m${run}`} className="relative inline-flex flex-none">
         <span className="bf-ring" aria-hidden /><span className="bf-ring r2" aria-hidden /><span className="bf-ring r3" aria-hidden /><span className="bf-ring r4" aria-hidden />
         <span className="bf-fly relative"><span className="bf-beat">
-          <span className="lg:hidden"><Mark size={28} /></span>
-          <span className="hidden lg:inline"><Mark size={36} /></span>
+          <span className="lg:hidden"><Mark size={44} /></span>
+          <span className="hidden lg:inline"><Mark size={72} /></span>
         </span></span>
       </span>
-      <span key={`t${run}`} aria-hidden className="hud-title relative whitespace-nowrap text-[13px] leading-none !tracking-[.12em] sm:text-[16px] sm:!tracking-[.18em] lg:text-[20px]">
+      <span key={`t${run}`} aria-hidden className="hud-title relative whitespace-nowrap text-[18px] leading-none !tracking-[.08em] sm:text-[28px] sm:!tracking-[.16em] lg:text-[40px]">
         <Letters text={first} from={0} />
         <Letters text="Effect Prediction" from={first.length} className="accent" />
       </span>
     </Link>
+  );
+}
+
+/** The headline beside the title: "AI predicts the next word, / We predict the next World" + a turning globe. */
+export function Tagline({ className = "" }: { className?: string }) {
+  return (
+    <p className={`flex flex-col gap-1 font-semibold leading-none ${className}`}>
+      <span className="dim text-[14px] sm:text-[16px] lg:text-[19px]">AI predicts the next word,</span>
+      <span className="accent flex items-center gap-2 whitespace-nowrap text-[24px] sm:text-[30px] lg:text-[38px]">
+        <span>We predict the next <span className="font-bold">World</span></span>
+        <SpinGlobe className="h-[1.25em] w-[1.25em] flex-none" />
+      </span>
+    </p>
   );
 }
 
@@ -73,7 +87,7 @@ export const AUTHOR_EMAIL = "DzoanNguyentran@gmail.com";
 /** The author's credit line, under the title (aligned with the title text) and in the footer. */
 export function Credit({ under = false }: { under?: boolean }) {
   return (
-    <p className={`mono text-[10.5px] leading-snug tracking-[.04em] sm:text-[11px] ${under ? "pl-[40px] lg:pl-[48px]" : ""}`}>
+    <p className={`mono text-[10.5px] leading-snug tracking-[.04em] sm:text-[11px] ${under ? "pl-[56px] lg:pl-[88px]" : ""}`}>
       <span className="dim">Made with </span><span style={{ color: "var(--action)" }}>love</span><span className="dim"> by </span>
       <a href={`mailto:${AUTHOR_EMAIL}`} className="accent underline decoration-dotted underline-offset-4 hover:brightness-125">{AUTHOR_EMAIL}</a>
       <span className="dim"> · </span><span style={{ color: "var(--amber)" }}>A better World Builder</span>
@@ -139,7 +153,10 @@ export function HudNav() {
   return (
     <header className="sticky top-0 z-40 border-b hairline" style={{ background: "rgba(7,8,13,.82)", backdropFilter: "blur(14px)" }}>
       <div className="mx-auto flex max-w-[1320px] flex-col gap-3 px-4 pb-2.5 pt-4 sm:px-6">
-        <div className="flex flex-col gap-1"><Brand /><Credit under /></div>
+        <div className="flex flex-wrap items-center justify-between gap-x-8 gap-y-3">
+          <div className="flex min-w-0 flex-col gap-1"><Brand /><Credit under /></div>
+          <Tagline />
+        </div>
         <MainNav />
       </div>
       {isOn(path, SECTIONS[2].match) && <HowTabs />}

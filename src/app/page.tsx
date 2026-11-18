@@ -18,7 +18,7 @@ import { CommandBar } from "@/components/console/CommandBar";
 import { IntelPanel, ReachPanel, WorldsPanel } from "@/components/console/Panels";
 import { SensorFeed, type Flows } from "@/components/console/SensorFeed";
 import { SceneCam } from "@/components/console/SceneCam";
-import { Brand, Credit, MainNav } from "@/components/Nav";
+import { Brand, Credit, MainNav, Tagline } from "@/components/Nav";
 import { WorldStack } from "@/components/WorldStack";
 import { BusinessBoard, EconomyBoard, GovernmentBoard, MediaBoard } from "@/components/bev/Boards";
 import { CascadePanel } from "@/components/bev/CascadeGraph";
@@ -477,6 +477,7 @@ export default function Console() {
       {/* header */}
       <header className="flex flex-none flex-wrap items-center gap-x-4 gap-y-1.5 border-b hairline px-3 pb-2 pt-3 sm:px-4">
         <div className="flex min-w-0 flex-col gap-1"><Brand /><Credit under /></div>
+        <Tagline className="ml-4 hidden xl:flex" />
         <p className="mono ml-auto hidden text-[10px] tracking-wider sm:block" style={{ color: !live.checked ? "var(--text-faint)" : live.text ? "var(--good)" : "var(--warn)" }} title={live.reason}>
           ● STANDALONE
         </p>
