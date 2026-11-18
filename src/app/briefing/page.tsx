@@ -44,7 +44,7 @@ export default function Briefing() {
           <header className="rise">
             <p className="classif">1 // What problem does this solve?</p>
             {/* the headline "AI LLM predicts the next Word, We predict the next World" sits in the header (Tagline) */}
-            <h1 className="mt-3 text-3xl font-semibold leading-snug sm:text-5xl"><span className="sr-only">AI LLM predicts the next Word, We predict the next World </span>by predicting the consequences of an action in <span className="accent">each layer of our Reality.</span></h1>
+            <h1 className="mt-3 text-2xl font-semibold leading-snug sm:text-[38px]"><span className="sr-only">AI LLM predicts the next Word, We predict the next World </span>by predicting the consequences of an action in <span className="accent">each layer of our Reality.</span></h1>
             <p className="dim mt-5 max-w-2xl text-lg leading-relaxed">
               AI agents are starting to act: they move money, change systems and post content. But a language model only predicts the next <i>word</i>. It does not track what an action <b className="text-[var(--text)]">changes</b>, for whom or where, and it rarely says &ldquo;I don&apos;t know&rdquo;.
               Butterfly Effect Prediction predicts what one action changes across ten worlds, with the rule behind every step.
