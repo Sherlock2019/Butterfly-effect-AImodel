@@ -14,7 +14,7 @@ const TOC = [["why", "Words vs consequences"], ["sowhat", "Why it matters"]] as 
 
 function Sec({ id, n, title, kicker, children }: { id: string; n: string; title: string; kicker: string; children: React.ReactNode }) {
   return (
-    <section id={id} className="scroll-mt-44 border-t hairline py-14">
+    <section id={id} className="scroll-mt-[260px] border-t hairline py-14">
       <p className="classif">{n} // {title}</p>
       <h2 className="mt-2 text-3xl font-semibold leading-tight sm:text-4xl">{kicker}</h2>
       <div className="brief mt-6">{children}</div>
@@ -31,7 +31,7 @@ export default function Briefing() {
     <PageShell>
       <div className="grid gap-10 lg:grid-cols-[200px_minmax(0,1fr)]">
         <nav className="hidden lg:block" aria-label="Sections">
-          <div className="sticky top-44 flex flex-col gap-1">
+          <div className="sticky top-[260px] flex flex-col gap-1">
             <p className="hud-label mb-2">1 · What problem does this solve?</p>
             {TOC.map(([id, l]) => (
               <a key={id} href={`#${id}`} className="mono dim rounded px-2 py-1 text-[11.5px] uppercase tracking-wider hover:bg-white/5 hover:text-[var(--text)]">{l}</a>
@@ -43,8 +43,8 @@ export default function Briefing() {
         <article className="min-w-0 max-w-[880px]">
           <header className="rise">
             <p className="classif">1 // What problem does this solve?</p>
-            {/* the headline "LLM models predict the next Word, We predict the next World" sits in the header (Tagline) */}
-            <h1 className="mt-3 text-3xl font-semibold leading-snug sm:text-5xl"><span className="sr-only">LLM models predict the next Word, We predict the next World </span>by predicting the consequences of an action in <span className="accent">each layer of our Reality.</span></h1>
+            {/* the headline "AI LLM predicts the next Word, We predict the next World" sits in the header (Tagline) */}
+            <h1 className="mt-3 text-3xl font-semibold leading-snug sm:text-5xl"><span className="sr-only">AI LLM predicts the next Word, We predict the next World </span>by predicting the consequences of an action in <span className="accent">each layer of our Reality.</span></h1>
             <p className="dim mt-5 max-w-2xl text-lg leading-relaxed">
               AI agents are starting to act: they move money, change systems and post content. But a language model only predicts the next <i>word</i>. It does not track what an action <b className="text-[var(--text)]">changes</b>, for whom or where, and it rarely says &ldquo;I don&apos;t know&rdquo;.
               Butterfly Effect Prediction predicts what one action changes across ten worlds, with the rule behind every step.

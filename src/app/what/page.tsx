@@ -55,7 +55,7 @@ const TERMS: [string, string][] = [
 
 function Sec({ id, title, kicker, children }: { id: string; title: string; kicker: string; children: React.ReactNode }) {
   return (
-    <section id={id} className="scroll-mt-44 border-t hairline py-14">
+    <section id={id} className="scroll-mt-[260px] border-t hairline py-14">
       <p className="classif">{title}</p>
       <h2 className="mt-2 text-3xl font-semibold leading-tight sm:text-4xl">{kicker}</h2>
       <div className="brief mt-6">{children}</div>
@@ -71,7 +71,7 @@ export default function What() {
     <PageShell>
       <div className="grid gap-10 lg:grid-cols-[200px_minmax(0,1fr)]">
         <nav className="hidden lg:block" aria-label="Sections">
-          <div className="sticky top-44 flex flex-col gap-1">
+          <div className="sticky top-[260px] flex flex-col gap-1">
             <p className="hud-label mb-2">2 · What is it?</p>
             {TOC.map(([id, l]) => (
               <a key={id} href={`#${id}`} className="mono dim rounded px-2 py-1 text-[11.5px] uppercase tracking-wider hover:bg-white/5 hover:text-[var(--text)]">{l}</a>
@@ -105,7 +105,7 @@ export default function What() {
 
           <Sec id="worlds-sec" title="Ten worlds" kicker="Ten worlds, each about its own kind of system.">
             <p>One actor performs one action. The action directly impacts one world first, and its consequences may reach others, any world to any world, not step by step up the stack. Every consequence sits on <b>two axes</b>: its <b>world</b> (which kind of system it is about) and its <b>ring</b> (how far it reaches, from the actor out to the earth).</p>
-            <div id="worlds" className="my-6 scroll-mt-44"><WorldStack /></div>
+            <div id="worlds" className="my-6 scroll-mt-[260px]"><WorldStack /></div>
             <div className="glass-flat my-6 overflow-x-auto">
               <table className="tbl">
                 <thead><tr><th>World</th><th>What it covers</th><th>In the app today</th><th>Status</th></tr></thead>

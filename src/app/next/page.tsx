@@ -86,7 +86,7 @@ export default function Next() {
           </details>
         </section>
 
-        <section id="build" className="scroll-mt-44 border-t hairline pt-10 mt-10">
+        <section id="build" className="scroll-mt-[260px] border-t hairline pt-10 mt-10">
           <p className="classif">Build it with us</p>
           <h2 className="mt-2 text-3xl font-semibold sm:text-4xl">We are looking for top AI talent.</h2>
           <p className="dim mt-4 text-[15px] leading-relaxed">

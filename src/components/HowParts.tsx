@@ -132,7 +132,7 @@ const STAGES: Stage[] = [
 
 export function NplmMath() {
   return (
-    <div id="nplm" className="scroll-mt-44 my-8">
+    <div id="nplm" className="scroll-mt-[260px] my-8">
       <p className="hud-label">The model, formula by formula · as implemented in the code</p>
       <p className="dim mt-2 text-[15px]">How <a href={NPLM} target="_blank" rel="noreferrer" className="underline decoration-dotted underline-offset-4">NPLM</a> understands a whole phrase (A), predicts the next phrase (B) and steers the words (C), and how the Butterfly Model turns that meaning into the next state (D).</p>
       <ol className="mt-4 grid gap-4">

@@ -37,7 +37,7 @@ function Letters({ text, from, className }: { text: string; from: number; classN
 }
 
 /**
- * The title: 40px on desktop (28px tablet, 18px phone so it still fits on one line).
+ * The title "Butterfly Effect Prediction Models": 40px on desktop (24px tablet, 13px phone so it still fits on one line).
  * Animation: the butterfly flies in and lands on the water, three rings spread under the title,
  * and each letter bobs as the ripple passes. Plays on load and again on hover (at most every 3 s);
  * with reduced motion it is a still title (globals.css).
@@ -53,7 +53,7 @@ export function Brand() {
   return (
     <Link href="/" onMouseEnter={replay} onFocus={replay}
       className="relative flex min-w-0 flex-none items-center gap-3 [--bf-rw:260vw] lg:gap-4"
-      aria-label="Butterfly Effect Prediction, home">
+      aria-label="Butterfly Effect Prediction Models, home">
       <span key={`m${run}`} className="relative inline-flex flex-none">
         <span className="bf-ring" aria-hidden /><span className="bf-ring r2" aria-hidden /><span className="bf-ring r3" aria-hidden /><span className="bf-ring r4" aria-hidden />
         <span className="bf-fly relative"><span className="bf-beat">
@@ -61,26 +61,30 @@ export function Brand() {
           <span className="hidden lg:inline"><Mark size={72} /></span>
         </span></span>
       </span>
-      <span key={`t${run}`} aria-hidden className="hud-title relative whitespace-nowrap text-[18px] leading-none !tracking-[.08em] sm:text-[28px] sm:!tracking-[.16em] lg:text-[40px]">
+      <span key={`t${run}`} aria-hidden className="hud-title relative whitespace-nowrap text-[13px] leading-none !tracking-[.05em] sm:text-[24px] sm:!tracking-[.12em] lg:text-[40px] lg:!tracking-[.14em]">
         <Letters text={first} from={0} />
-        <Letters text="Effect Prediction" from={first.length} className="accent" />
+        <Letters text="Effect Prediction Models" from={first.length} className="accent" />
       </span>
     </Link>
   );
 }
 
 /**
- * The headline beside the title: a small first line "LLM models predict the next Word," and under it,
- * twice as big, "We predict the next World", with a big rotating Earth beside both lines.
+ * The headline beside the title: "AI LLM predicts the next Word," at the size of a page heading (48px
+ * desktop) and under it, bigger (72px), "We predict the next World", with a big rotating Earth beside
+ * both lines. `compact` is the console's smaller version, so its panels keep their room.
  */
-export function Tagline({ className = "" }: { className?: string }) {
+export function Tagline({ className = "", compact = false }: { className?: string; compact?: boolean }) {
+  const l1 = compact ? "text-[16px]" : "text-[22px] sm:text-5xl";
+  const l2 = compact ? "text-[30px]" : "text-[32px] sm:text-[52px] lg:text-[72px]";
+  const g = compact ? "h-16 w-16" : "h-20 w-20 sm:h-28 sm:w-28 lg:h-36 lg:w-36";
   return (
-    <p className={`flex items-center gap-4 font-semibold ${className}`}>
-      <span className="flex min-w-0 flex-col gap-1.5">
-        <span className="dim text-[13px] leading-tight sm:text-[16px] lg:text-[20px]">LLM models predict the next Word,</span>
-        <span className="accent text-[24px] leading-none sm:text-[38px] lg:whitespace-nowrap lg:text-[56px]">We predict the next <span className="font-bold">World</span></span>
+    <p className={`flex items-center gap-5 font-semibold ${className}`}>
+      <span className="flex min-w-0 flex-col gap-2">
+        <span className={`leading-tight ${l1}`}>AI LLM predicts the next Word,</span>
+        <span className={`accent leading-none lg:whitespace-nowrap ${l2}`}>We predict the next <span className="font-bold">World</span></span>
       </span>
-      <SpinGlobe className="h-16 w-16 flex-none sm:h-20 sm:w-20 lg:h-28 lg:w-28" />
+      <SpinGlobe className={`flex-none ${g}`} />
     </p>
   );
 }
