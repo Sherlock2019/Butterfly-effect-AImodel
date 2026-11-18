@@ -69,15 +69,18 @@ export function Brand() {
   );
 }
 
-/** The headline beside the title, one line at one size: "LLM models predict the next Word, We predict the next World" + a big rotating Earth. */
+/**
+ * The headline beside the title: a small first line "LLM models predict the next Word," and under it,
+ * twice as big, "We predict the next World", with a big rotating Earth beside both lines.
+ */
 export function Tagline({ className = "" }: { className?: string }) {
   return (
-    <p className={`flex items-center gap-3 text-[15px] font-semibold leading-tight sm:text-[19px] lg:whitespace-nowrap lg:text-[28px] ${className}`}>
-      <span>
-        <span className="dim">LLM models predict the next Word, </span>
-        <span className="accent">We predict the next <span className="font-bold">World</span></span>
+    <p className={`flex items-center gap-4 font-semibold ${className}`}>
+      <span className="flex min-w-0 flex-col gap-1.5">
+        <span className="dim text-[13px] leading-tight sm:text-[16px] lg:text-[20px]">LLM models predict the next Word,</span>
+        <span className="accent text-[24px] leading-none sm:text-[38px] lg:whitespace-nowrap lg:text-[56px]">We predict the next <span className="font-bold">World</span></span>
       </span>
-      <SpinGlobe className="h-[3.2em] w-[3.2em] flex-none" />
+      <SpinGlobe className="h-16 w-16 flex-none sm:h-20 sm:w-20 lg:h-28 lg:w-28" />
     </p>
   );
 }
